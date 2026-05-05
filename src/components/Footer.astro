@@ -1,0 +1,80 @@
+---
+import site from '../data/site.json';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-block">
+      <p class="eyebrow">Find us</p>
+      <p>{site.address.street}<br />{site.address.cityState}</p>
+      <p><a href={`tel:${site.phone.tel}`}>{site.phone.display}</a></p>
+    </div>
+    <div class="footer-block">
+      <p class="eyebrow">Hours</p>
+      {site.hours.map(h => (
+        <p class="hours-line">
+          <span>{h.days}</span>
+          <span>{h.note ? h.note : `${h.open}–${h.close}`}</span>
+        </p>
+      ))}
+    </div>
+    <div class="footer-block">
+      <p class="eyebrow">Olive Branch</p>
+      <p class="footer-tagline">Authentic Mediterranean.<br />Made by hand in {site.city}.</p>
+      <p class="copyright">© {year} Olive Branch</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ink);
+    color: var(--cream);
+    padding: var(--space-6) 0 var(--space-4);
+    margin-top: var(--space-8);
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+  @media (min-width: 768px) {
+    .footer-inner {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--space-6);
+    }
+  }
+  .footer-block p {
+    margin-bottom: var(--space-1);
+    color: var(--cream);
+  }
+  .footer-block .eyebrow {
+    color: var(--cream-warm);
+    margin-bottom: var(--space-2);
+    opacity: 0.7;
+  }
+  .footer-block a {
+    color: var(--cream);
+  }
+  .footer-block a:hover { color: var(--terracotta); }
+  .hours-line {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-2);
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(244, 237, 221, 0.1);
+    padding: 0.35rem 0;
+  }
+  .footer-tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.4;
+  }
+  .copyright {
+    margin-top: var(--space-3);
+    font-size: 0.85rem;
+    opacity: 0.6;
+  }
+</style>

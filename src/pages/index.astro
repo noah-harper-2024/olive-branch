@@ -1,17 +1,98 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../data/site.json';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <section class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow">{site.city} · Carry-out kitchen</p>
+      <h1 class="hero-title">
+        Authentic<br />
+        <em>Mediterranean.</em>
+      </h1>
+      <p class="hero-lede">
+        Off the grill. Rotisserie chicken on the spit. Hummus and pita made fresh.
+        Family recipes, served quick, in a quiet corner of {site.city}.
+      </p>
+      <div class="hero-ctas">
+        {site.orderUrl ? (
+          <a href={site.orderUrl} class="btn btn-primary" target="_blank" rel="noopener">Order Online</a>
+        ) : (
+          <a href={`tel:${site.phone.tel}`} class="btn btn-primary">Call {site.phone.display}</a>
+        )}
+        <a href="/menu" class="btn btn-secondary">See the Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip">
+    <div class="container strip-inner">
+      <div>
+        <p class="eyebrow">Address</p>
+        <p>{site.address.street}<br />{site.address.cityState}</p>
+      </div>
+      <div>
+        <p class="eyebrow">Phone</p>
+        <p><a href={`tel:${site.phone.tel}`}>{site.phone.display}</a></p>
+      </div>
+      <div>
+        <p class="eyebrow">Today</p>
+        <p>11:00 AM – 9:00 PM<br /><span class="muted">Closed Tuesdays</span></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: var(--space-7) 0 var(--space-8);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-inner {
+    max-width: 900px;
+  }
+  .hero-title {
+    margin: var(--space-3) 0 var(--space-4);
+    line-height: 0.95;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--olive-deep);
+    font-weight: 300;
+  }
+  .hero-lede {
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    color: var(--ink-soft);
+    max-width: 36ch;
+    margin-bottom: var(--space-4);
+    line-height: 1.5;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .strip {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: var(--space-4) 0;
+    background: var(--cream-warm);
+  }
+  .strip-inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+  @media (min-width: 768px) {
+    .strip-inner {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--space-5);
+    }
+  }
+  .strip p { margin-bottom: var(--space-1); }
+  .strip .eyebrow { margin-bottom: var(--space-1); }
+  .muted { color: var(--ink-soft); font-style: italic; }
+</style>
