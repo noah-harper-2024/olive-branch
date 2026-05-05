@@ -10,6 +10,7 @@
     "display": "(618) 726-0712",
     "tel": "+16187260712"
   },
+  "mapsUrl": "https://www.google.com/maps/dir/?api=1&destination=204+Scott+Troy+Rd+Unit+D+O%27Fallon+IL+62269",
   "hours": [
     { "days": "Monday", "open": "11:00 AM", "close": "9:00 PM" },
     { "days": "Tuesday", "open": null, "close": null, "note": "Closed" },
@@ -19,6 +20,5 @@
     { "days": "Saturday", "open": "11:00 AM", "close": "9:00 PM" },
     { "days": "Sunday", "open": "11:00 AM", "close": "6:00 PM" }
   ],
-  "orderUrl": "",
-  "social": {}
+  "orderUrl": ""
 }

@@ -1,0 +1,66 @@
+{
+  "sections": [
+    {
+      "name": "Salads & Soup",
+      "items": [
+        { "name": "Caesar Salad", "price": 0, "description": "" },
+        { "name": "Greek Salad", "price": 0, "description": "" },
+        { "name": "Soup of the Day", "price": 0, "description": "Cup or bowl" }
+      ]
+    },
+    {
+      "name": "Sandwiches & Wraps",
+      "items": [
+        { "name": "Crispy Chicken Sandwich", "price": 0, "description": "" },
+        { "name": "Spicy Chicken Sandwich", "price": 0, "description": "" },
+        { "name": "Single Cheeseburger", "price": 0, "description": "" },
+        { "name": "Beef Cheeseburger", "price": 0, "description": "" },
+        { "name": "Beef Shawarma Sandwich", "price": 0, "description": "" },
+        { "name": "Chicken Shawarma Sandwich", "price": 0, "description": "" },
+        { "name": "Falafel Sandwich", "price": 0, "description": "" },
+        { "name": "Rotisserie Wrap", "price": 0, "description": "" }
+      ]
+    },
+    {
+      "name": "Off the Grill",
+      "items": [
+        { "name": "Steak Kabob", "price": 0, "description": "Served with rice and salad" },
+        { "name": "Beef Kabob", "price": 0, "description": "Served with rice and salad" },
+        { "name": "Chicken Kabob", "price": 0, "description": "Served with rice and salad" },
+        { "name": "Lamb Chop Plate", "price": 0, "description": "Served with rice and salad" },
+        { "name": "Beef Shawarma Plate", "price": 0, "description": "Served with rice and salad" },
+        { "name": "Chicken Shawarma Plate", "price": 0, "description": "Served with rice and salad" }
+      ]
+    },
+    {
+      "name": "Rotisserie Chicken",
+      "items": [
+        { "name": "Whole Chicken", "price": 0, "description": "" },
+        { "name": "Half Chicken", "price": 0, "description": "" }
+      ]
+    },
+    {
+      "name": "Sides",
+      "items": [
+        { "name": "Hummus", "price": 0, "description": "" },
+        { "name": "Okra", "price": 0, "description": "" },
+        { "name": "Pinto Beans", "price": 0, "description": "" },
+        { "name": "Coleslaw", "price": 0, "description": "" },
+        { "name": "Cucumber Salad", "price": 0, "description": "" },
+        { "name": "French Fries", "price": 0, "description": "" },
+        { "name": "Fried Pita", "price": 0, "description": "" },
+        { "name": "Tahini Sauce", "price": 0, "description": "" },
+        { "name": "Spicy Sauce", "price": 0, "description": "" },
+        { "name": "Turkish Sauce", "price": 0, "description": "" }
+      ]
+    },
+    {
+      "name": "Extras",
+      "items": [
+        { "name": "Extra Beef Kabob", "price": 0, "description": "" },
+        { "name": "Extra Chicken Kabob", "price": 0, "description": "" },
+        { "name": "Extra Lamb Chop", "price": 0, "description": "" }
+      ]
+    }
+  ]
+}

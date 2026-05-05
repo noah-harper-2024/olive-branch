@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../data/site.json';
+---
+
+<BaseLayout title="Order Online">
+  <section class="order-hero">
+    <div class="container order-container">
+      <p class="eyebrow">Online Ordering</p>
+      <h1><em>Almost ready.</em></h1>
+      <p class="lede">
+        We're getting our online ordering set up this week. In the meantime,
+        give us a call — we'll have it hot and ready when you arrive.
+      </p>
+      <div class="ctas">
+        <a href={`tel:${site.phone.tel}`} class="btn btn-primary">Call {site.phone.display}</a>
+        <a href="/menu" class="btn btn-secondary">See the Menu</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .order-hero {
+    padding: var(--space-7) 0 var(--space-8);
+    text-align: center;
+  }
+  .order-container { max-width: 640px; }
+  .order-hero h1 {
+    margin: var(--space-2) 0 var(--space-4);
+  }
+  .order-hero h1 em {
+    font-style: italic;
+    color: var(--olive-deep);
+  }
+  .lede {
+    font-size: 1.2rem;
+    color: var(--ink-soft);
+    margin: 0 auto var(--space-4);
+    line-height: 1.5;
+  }
+  .ctas {
+    display: flex;
+    gap: var(--space-2);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

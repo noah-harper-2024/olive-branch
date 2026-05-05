@@ -1,5 +1,7 @@
 ---
 import site from '../data/site.json';
+const orderHref = site.orderUrl || '/order';
+const orderTarget = site.orderUrl ? '_blank' : '_self';
 ---
 
 <header class="site-header">
@@ -11,15 +13,9 @@ import site from '../data/site.json';
       <a href="/menu">Menu</a>
       <a href="/about">About</a>
       <a href="/contact">Visit</a>
-      {site.orderUrl ? (
-        <a href={site.orderUrl} class="btn btn-primary nav-cta" target="_blank" rel="noopener">
-          Order Online
-        </a>
-      ) : (
-        <a href={`tel:${site.phone.tel}`} class="btn btn-primary nav-cta">
-          Call to Order
-        </a>
-      )}
+      <a href={orderHref} class="btn btn-primary nav-cta" target={orderTarget} rel="noopener">
+        Order Online
+      </a>
     </nav>
   </div>
 </header>
