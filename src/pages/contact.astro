@@ -7,31 +7,45 @@ import contactHero from '../assets/photos/IMG_0173.jpg';
 ---
 
 <BaseLayout title="Visit">
-  <section class="contact-hero">
-    <div class="container contact-hero-grid">
-      <div class="contact-hero-copy">
-        <p class="eyebrow">Visit</p>
-        <h1><em>Find us.</em></h1>
+  <section class="hero hero-interior">
+    <Image
+      src={contactHero}
+      alt="Chicken kabobs over flatbread with cucumber, tomato, and dill yogurt"
+      widths={[720, 1200, 1600, 2000]}
+      sizes="100vw"
+      loading="eager"
+      class="hero-bg"
+    />
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <p class="eyebrow hero-eyebrow">Visit</p>
+      <h1 class="hero-title">Find us.</h1>
+      <p class="hero-sub">
+        Carry-out kitchen in {site.city}. Open six days a week.
+      </p>
+    </div>
+  </section>
 
-        <div class="info-grid">
-          <div class="info-block">
-            <p class="eyebrow">Address</p>
-            <p class="info-text">
-              {site.address.street}<br />
-              {site.address.cityState}
-            </p>
-            <a href={site.mapsUrl} class="btn btn-secondary" target="_blank" rel="noopener">
-              Get Directions
-            </a>
-          </div>
+  <section class="contact-body">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-block">
+          <p class="eyebrow">Address</p>
+          <p class="info-text">
+            {site.address.street}<br />
+            {site.address.cityState}
+          </p>
+          <a href={site.mapsUrl} class="btn btn-secondary" target="_blank" rel="noopener">
+            Get Directions
+          </a>
+        </div>
 
-          <div class="info-block">
-            <p class="eyebrow">Phone</p>
-            <p class="info-text">
-              <a href={`tel:${site.phone.tel}`}>{site.phone.display}</a>
-            </p>
-            <a href={`tel:${site.phone.tel}`} class="btn btn-secondary">Call to Order</a>
-          </div>
+        <div class="info-block">
+          <p class="eyebrow">Phone</p>
+          <p class="info-text">
+            <a href={`tel:${site.phone.tel}`}>{site.phone.display}</a>
+          </p>
+          <a href={`tel:${site.phone.tel}`} class="btn btn-secondary">Call to Order</a>
         </div>
 
         <div class="info-block info-hours">
@@ -46,51 +60,75 @@ import contactHero from '../assets/photos/IMG_0173.jpg';
           </ul>
         </div>
       </div>
-
-      <figure class="contact-hero-figure">
-        <Image
-          src={contactHero}
-          alt="Chicken kabobs over flatbread with cucumber, tomato, and dill yogurt"
-          widths={[400, 600, 800]}
-          sizes="(min-width: 900px) 40vw, 100vw"
-          loading="eager"
-        />
-      </figure>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .contact-hero { padding: var(--space-6) 0 var(--space-7); }
-  .contact-hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-5);
-    align-items: start;
+  /* Shared full-bleed hero — interior pages */
+  .hero-interior {
+    position: relative;
+    min-height: min(60vh, 560px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    isolation: isolate;
+    text-align: center;
   }
-  @media (min-width: 900px) {
-    .contact-hero-grid {
-      grid-template-columns: 1.2fr 1fr;
-      gap: var(--space-6);
-    }
+  .hero-interior :global(.hero-bg) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
   }
-  .contact-hero h1 {
-    margin: var(--space-2) 0 var(--space-5);
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(20, 17, 13, 0.4) 0%, rgba(20, 17, 13, 0.65) 100%);
+    z-index: -1;
   }
-  .contact-hero h1 em {
+  .hero-content {
+    color: var(--cream);
+    padding: var(--space-6) var(--space-3);
+    max-width: 900px;
+  }
+  .hero-eyebrow {
+    color: var(--cream-warm);
+    margin-bottom: var(--space-3);
+    opacity: 0.9;
+  }
+  .hero-title {
+    color: var(--cream);
     font-style: italic;
-    color: var(--olive-deep);
-    font-weight: 300;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+  }
+  .hero-sub {
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    color: var(--cream-warm);
+    max-width: 42ch;
+    margin: 0 auto var(--space-4);
+    line-height: 1.5;
+  }
+
+  .contact-body {
+    padding: var(--space-7) 0;
   }
 
   .info-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-5);
-    margin-bottom: var(--space-5);
+    max-width: 1000px;
+    margin: 0 auto;
   }
-  @media (min-width: 480px) {
-    .info-grid { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  @media (min-width: 768px) {
+    .info-grid { grid-template-columns: 1fr 1fr 1.2fr; gap: var(--space-6); }
   }
 
   .info-block .eyebrow { margin-bottom: var(--space-2); }
@@ -102,11 +140,6 @@ import contactHero from '../assets/photos/IMG_0173.jpg';
   }
   .info-text a { text-decoration: none; }
 
-  .info-hours {
-    border-top: 1px solid var(--line);
-    padding-top: var(--space-4);
-  }
-
   .hours-list { list-style: none; }
   .hours-list li {
     display: flex;
@@ -117,22 +150,4 @@ import contactHero from '../assets/photos/IMG_0173.jpg';
     font-size: 1rem;
   }
   .hours-list li:last-child { border-bottom: none; }
-
-  .contact-hero-figure {
-    margin: 0;
-    overflow: hidden;
-    border-radius: 4px;
-    aspect-ratio: 4 / 5;
-    position: sticky;
-    top: var(--space-4);
-  }
-  @media (max-width: 900px) {
-    .contact-hero-figure { position: static; }
-  }
-  .contact-hero-figure :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
 </style>
