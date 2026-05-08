@@ -38,22 +38,37 @@ const categories = [
   }
 ];
 
-// Placeholder reviews — replace with real ones from Yelp/Google before launch
+// Real Yelp reviews — all 5-star
 const reviews = [
   {
     quote: "A sweet family running a family business with great customer service. The food is AMAZING. Definitely a repeat place for this crew.",
     name: "Patti B.",
-    source: "Yelp"
-  },
-  {
-    quote: "Excellent Mediterranean food. Very friendly and yummy. I ordered the chicken shawarma and gyro, subbed in coleslaw and cucumber salad. All were delicious.",
-    name: "Jessica P.",
-    source: "Yelp"
+    location: "San Angelo, TX"
   },
   {
     quote: "Middle Eastern dining with a casual price. Fresh food and generous portions. I subbed hummus for fries — they make their own. Locally owned and brand new. It won't disappoint.",
     name: "Rob S.",
-    source: "Yelp"
+    location: "Chatham, IL"
+  },
+  {
+    quote: "If you like Mediterranean food this is the place to go. Small family business. Carry out. Check the menu out.",
+    name: "ReKel H.",
+    location: "O'Fallon, IL"
+  },
+  {
+    quote: "Excellent Mediterranean food. Very friendly and yummy. I ordered the chicken shawarma and gyro, subbed in coleslaw and cucumber salad. All were delicious.",
+    name: "Jessica P.",
+    location: "Thornton, CO"
+  },
+  {
+    quote: "Very friendly, quick, and the food is delicious. If you're looking for a place to get good food with awesome portions at a great price, Olive Branch is perfect!",
+    name: "Aric L.",
+    location: "Carmel, IN"
+  },
+  {
+    quote: "The food here is simply AMAZING!! Delicious everything! My two teens loved it! Order your family dinner and bring home GREAT food!",
+    name: "Alicia T.",
+    location: "Illinois"
   }
 ];
 ---
@@ -164,19 +179,87 @@ const reviews = [
 
   <section class="reviews">
     <div class="container">
-      <header class="section-header">
+      <header class="section-header reviews-header">
         <p class="eyebrow">What people say</p>
+        <p class="reviews-summary">
+          <span class="summary-stars" aria-hidden="true">★★★★★</span>
+          <span class="summary-text">5.0 on Yelp · {reviews.length} reviews</span>
+        </p>
       </header>
-      <div class="review-grid">
-        {reviews.map(r => (
-          <blockquote class="review">
-            <p class="review-quote">“{r.quote}”</p>
-            <footer class="review-attr">— {r.name}, <span>{r.source}</span></footer>
-          </blockquote>
-        ))}
+
+      <div class="reviews-carousel" data-reviews>
+        <div class="reviews-track" aria-live="polite">
+          {reviews.map((r, i) => (
+            <blockquote class={`review-card ${i === 0 ? 'is-active' : ''}`} data-index={i}>
+              <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+              <p class="review-quote">“{r.quote}”</p>
+              <footer class="review-attr">
+                — {r.name}{r.location ? `, ${r.location}` : ''} · <span>Yelp</span>
+              </footer>
+            </blockquote>
+          ))}
+        </div>
+
+        <div class="review-dots" role="tablist" aria-label="Choose review">
+          {reviews.map((_, i) => (
+            <button
+              type="button"
+              class={`dot ${i === 0 ? 'is-active' : ''}`}
+              data-go={i}
+              role="tab"
+              aria-label={`Show review ${i + 1} of ${reviews.length}`}
+            ></button>
+          ))}
+        </div>
       </div>
+
+      <p class="reviews-link">
+        <a href="https://www.yelp.com/biz/olive-branch-o-fallon" target="_blank" rel="noopener">Read more on Yelp →</a>
+      </p>
     </div>
   </section>
+
+  <script is:inline>
+    (() => {
+      const carousel = document.querySelector('[data-reviews]');
+      if (!carousel) return;
+      const cards = carousel.querySelectorAll('.review-card');
+      const dots = carousel.querySelectorAll('.dot');
+      if (!cards.length) return;
+
+      let current = 0;
+      let timer = null;
+      const ROTATE_MS = 7000;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function show(i) {
+        cards[current].classList.remove('is-active');
+        dots[current].classList.remove('is-active');
+        current = (i + cards.length) % cards.length;
+        cards[current].classList.add('is-active');
+        dots[current].classList.add('is-active');
+      }
+      function next() { show(current + 1); }
+      function start() {
+        stop();
+        if (reduceMotion) return;
+        timer = setInterval(next, ROTATE_MS);
+      }
+      function stop() {
+        if (timer) { clearInterval(timer); timer = null; }
+      }
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => { show(i); start(); });
+      });
+      carousel.addEventListener('mouseenter', stop);
+      carousel.addEventListener('mouseleave', start);
+      carousel.addEventListener('focusin', stop);
+      carousel.addEventListener('focusout', start);
+
+      start();
+    })();
+  </script>
 
   <section class="final-cta">
     <Image
@@ -430,35 +513,112 @@ const reviews = [
     transform: scale(1.05);
   }
 
-  /* REVIEWS */
+  /* REVIEWS — auto-rotating carousel */
   .reviews {
     padding: var(--space-7) 0;
   }
-  .review-grid {
+  .reviews-header {
+    text-align: center;
+    margin: 0 auto var(--space-5);
+  }
+  .reviews-summary {
+    margin: var(--space-2) auto 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .summary-stars {
+    color: #c99a4d;
+    letter-spacing: 0.1em;
+    font-size: 1.1rem;
+  }
+  .summary-text {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    font-style: italic;
+  }
+
+  .reviews-carousel {
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .reviews-track {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-4);
   }
-  @media (min-width: 768px) {
-    .review-grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+  .review-card {
+    grid-area: 1 / 1;
+    text-align: center;
+    padding: 0 var(--space-2);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 600ms ease, transform 600ms ease;
+    pointer-events: none;
   }
-  .review {
-    border-left: 2px solid var(--olive);
-    padding-left: var(--space-3);
+  .review-card.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .review-card { transition: none; transform: none; }
+  }
+  .review-stars {
+    color: #c99a4d;
+    letter-spacing: 0.18em;
+    font-size: 1.15rem;
+    margin-bottom: var(--space-3);
   }
   .review-quote {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 1.2rem;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
     line-height: 1.45;
     color: var(--ink);
-    margin-bottom: var(--space-2);
+    margin: 0 auto var(--space-3);
+    max-width: 60ch;
   }
   .review-attr {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--ink-soft);
   }
-  .review-attr span { font-style: italic; }
+  .review-attr span { font-style: italic; color: var(--olive-deep); }
+
+  .review-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: var(--space-4);
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid var(--olive);
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: background 200ms ease, transform 200ms ease;
+  }
+  .dot:hover { background: var(--olive); transform: scale(1.15); }
+  .dot.is-active { background: var(--olive); }
+  .dot:focus-visible {
+    outline: 2px solid var(--terracotta);
+    outline-offset: 3px;
+  }
+
+  .reviews-link {
+    text-align: center;
+    margin-top: var(--space-4);
+    font-size: 0.95rem;
+  }
+  .reviews-link a {
+    color: var(--terracotta);
+    text-decoration: none;
+  }
+  .reviews-link a:hover { color: var(--terracotta-deep); }
 
   /* FINAL CTA — full-bleed photo */
   .final-cta {
