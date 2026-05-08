@@ -1,32 +1,37 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import site from '../data/site.json';
+
+import contactHero from '../assets/photos/IMG_0173.jpg';
 ---
 
 <BaseLayout title="Visit">
   <section class="contact-hero">
-    <div class="container contact-container">
-      <p class="eyebrow">Visit</p>
-      <h1>Find us.</h1>
+    <div class="container contact-hero-grid">
+      <div class="contact-hero-copy">
+        <p class="eyebrow">Visit</p>
+        <h1><em>Find us.</em></h1>
 
-      <div class="info-grid">
-        <div class="info-block">
-          <p class="eyebrow">Address</p>
-          <p class="info-text">
-            {site.address.street}<br />
-            {site.address.cityState}
-          </p>
-          <a href={site.mapsUrl} class="btn btn-secondary" target="_blank" rel="noopener">
-            Get Directions
-          </a>
-        </div>
+        <div class="info-grid">
+          <div class="info-block">
+            <p class="eyebrow">Address</p>
+            <p class="info-text">
+              {site.address.street}<br />
+              {site.address.cityState}
+            </p>
+            <a href={site.mapsUrl} class="btn btn-secondary" target="_blank" rel="noopener">
+              Get Directions
+            </a>
+          </div>
 
-        <div class="info-block">
-          <p class="eyebrow">Phone</p>
-          <p class="info-text">
-            <a href={`tel:${site.phone.tel}`}>{site.phone.display}</a>
-          </p>
-          <a href={`tel:${site.phone.tel}`} class="btn btn-secondary">Call to Order</a>
+          <div class="info-block">
+            <p class="eyebrow">Phone</p>
+            <p class="info-text">
+              <a href={`tel:${site.phone.tel}`}>{site.phone.display}</a>
+            </p>
+            <a href={`tel:${site.phone.tel}`} class="btn btn-secondary">Call to Order</a>
+          </div>
         </div>
 
         <div class="info-block info-hours">
@@ -41,25 +46,51 @@ import site from '../data/site.json';
           </ul>
         </div>
       </div>
+
+      <figure class="contact-hero-figure">
+        <Image
+          src={contactHero}
+          alt="Chicken kabobs over flatbread with cucumber, tomato, and dill yogurt"
+          widths={[400, 600, 800]}
+          sizes="(min-width: 900px) 40vw, 100vw"
+          loading="eager"
+        />
+      </figure>
     </div>
   </section>
 </BaseLayout>
 
 <style>
   .contact-hero { padding: var(--space-6) 0 var(--space-7); }
-  .contact-container { max-width: 1000px; }
+  .contact-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .contact-hero-grid {
+      grid-template-columns: 1.2fr 1fr;
+      gap: var(--space-6);
+    }
+  }
   .contact-hero h1 {
     margin: var(--space-2) 0 var(--space-5);
+  }
+  .contact-hero h1 em {
     font-style: italic;
+    color: var(--olive-deep);
+    font-weight: 300;
   }
 
   .info-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-5);
+    margin-bottom: var(--space-5);
   }
-  @media (min-width: 768px) {
-    .info-grid { grid-template-columns: 1fr 1fr 1.2fr; gap: var(--space-6); }
+  @media (min-width: 480px) {
+    .info-grid { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
   }
 
   .info-block .eyebrow { margin-bottom: var(--space-2); }
@@ -71,6 +102,11 @@ import site from '../data/site.json';
   }
   .info-text a { text-decoration: none; }
 
+  .info-hours {
+    border-top: 1px solid var(--line);
+    padding-top: var(--space-4);
+  }
+
   .hours-list { list-style: none; }
   .hours-list li {
     display: flex;
@@ -81,4 +117,22 @@ import site from '../data/site.json';
     font-size: 1rem;
   }
   .hours-list li:last-child { border-bottom: none; }
+
+  .contact-hero-figure {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 4px;
+    aspect-ratio: 4 / 5;
+    position: sticky;
+    top: var(--space-4);
+  }
+  @media (max-width: 900px) {
+    .contact-hero-figure { position: static; }
+  }
+  .contact-hero-figure :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 </style>
