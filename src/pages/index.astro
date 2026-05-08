@@ -1,6 +1,18 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import site from '../data/site.json';
+
+import hero from '../assets/photos/hero.jpg';
+import grill from '../assets/photos/IMG_0172.jpg';
+import rotisserie from '../assets/photos/IMG_0176.jpg';
+import wraps from '../assets/photos/IMG_0174.jpg';
+import storyTable from '../assets/photos/IMG_0169.jpg';
+import gallery1 from '../assets/photos/IMG_0168.jpg';
+import gallery2 from '../assets/photos/IMG_0171.jpg';
+import gallery3 from '../assets/photos/IMG_0170.jpg';
+import gallery4 from '../assets/photos/IMG_0173.jpg';
+import finalBg from '../assets/photos/IMG_0175.jpg';
 
 const orderHref = site.orderUrl || '/order';
 const orderTarget = site.orderUrl ? '_blank' : '_self';
@@ -8,15 +20,21 @@ const orderTarget = site.orderUrl ? '_blank' : '_self';
 const categories = [
   {
     title: "Off the Grill",
-    description: "Kabobs and lamb chops. Marinated, charred, served over rice with salad."
+    description: "Kabobs and lamb chops. Marinated overnight, charred over open flame, served over rice.",
+    image: grill,
+    alt: "Char-grilled chicken kabobs with vegetables and a side of tzatziki"
   },
   {
     title: "The Rotisserie",
-    description: "Whole or half chickens, seasoned the night before, slow-roasted on the spit."
+    description: "Whole or half chickens, seasoned the night before, slow-roasted on the spit until the skin shatters.",
+    image: rotisserie,
+    alt: "Whole rotisserie chicken with herbs and roasted potatoes in a cast iron pan"
   },
   {
     title: "Sandwiches & Wraps",
-    description: "Shawarma carved off the vertical spit. Falafel fried to order. Pita fresh."
+    description: "Shawarma carved off the vertical spit. Falafel fried to order. Fresh pita, every morning.",
+    image: wraps,
+    alt: "Mediterranean wrap with shawarma, pickled onions, herbs, and fries"
   }
 ];
 
@@ -42,29 +60,64 @@ const reviews = [
 
 <BaseLayout>
   <section class="hero">
-    <div class="container hero-inner">
-      <p class="eyebrow">{site.city} · Carry-out kitchen</p>
-      <h1 class="hero-title">
-        Authentic<br />
-        <em>Mediterranean.</em>
-      </h1>
-      <p class="hero-lede">
-        Off the grill. Rotisserie chicken on the spit. Hummus and pita made fresh.
-        Family recipes, served quick, in a quiet corner of {site.city}.
-      </p>
-      <div class="hero-ctas">
-        <a href={orderHref} class="btn btn-primary" target={orderTarget} rel="noopener">Order Online</a>
-        <a href="/menu" class="btn btn-secondary">See the Menu</a>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">{site.city} · Carry-out kitchen</p>
+        <h1 class="hero-title">
+          Authentic<br />
+          <em>Mediterranean.</em>
+        </h1>
+        <p class="hero-lede">
+          Off the grill. Rotisserie chicken on the spit. Hummus and pita made fresh.
+          Family recipes, served quick, in a quiet corner of {site.city}.
+        </p>
+        <div class="hero-ctas">
+          <a href={orderHref} class="btn btn-primary" target={orderTarget} rel="noopener">Order Online</a>
+          <a href="/menu" class="btn btn-secondary">See the Menu</a>
+        </div>
       </div>
+      <figure class="hero-figure">
+        <Image
+          src={hero}
+          alt="Hummus, muhammara, and dips with olives on a green tiled table"
+          widths={[480, 720, 960, 1200]}
+          sizes="(min-width: 900px) 45vw, 100vw"
+          loading="eager"
+        />
+      </figure>
     </div>
   </section>
 
+  <div class="marquee">
+    <div class="container marquee-inner">
+      <span><em>Carry-out only</em></span>
+      <span class="dot">·</span>
+      <span>{site.address.street}</span>
+      <span class="dot">·</span>
+      <span>Open today, 11–9</span>
+      <span class="dot">·</span>
+      <span><a href={`tel:${site.phone.tel}`}>{site.phone.display}</a></span>
+    </div>
+  </div>
+
   <section class="categories">
     <div class="container">
-      <p class="eyebrow section-eyebrow">What we cook</p>
+      <header class="section-header">
+        <p class="eyebrow">What we cook</p>
+        <h2 class="section-title">Three things, done well.</h2>
+      </header>
       <div class="cat-grid">
         {categories.map(c => (
           <article class="cat-card">
+            <div class="cat-image">
+              <Image
+                src={c.image}
+                alt={c.alt}
+                widths={[400, 600, 800]}
+                sizes="(min-width: 900px) 32vw, 100vw"
+                loading="lazy"
+              />
+            </div>
             <h3>{c.title}</h3>
             <p>{c.description}</p>
           </article>
@@ -74,19 +127,54 @@ const reviews = [
   </section>
 
   <section class="story">
-    <div class="container story-inner">
-      <p class="eyebrow">The kitchen</p>
-      <p class="story-text">
-        Olive Branch is a small, family-run Mediterranean kitchen. We make food the way it should be made —
-        by hand, every day, with no shortcuts. Come pick up dinner.
-      </p>
-      <a href="/about" class="story-link">More about the kitchen →</a>
+    <div class="container story-grid">
+      <figure class="story-figure">
+        <Image
+          src={storyTable}
+          alt="Sunlit Mediterranean table with hummus, pita, olives, and an olive branch"
+          widths={[400, 600, 800]}
+          sizes="(min-width: 900px) 45vw, 100vw"
+          loading="lazy"
+        />
+      </figure>
+      <div class="story-copy">
+        <p class="eyebrow">The kitchen</p>
+        <p class="story-text">
+          Olive Branch is a small, family-run Mediterranean kitchen.
+          We make food the way it should be made — <em>by hand,
+          every day, with no shortcuts.</em>
+        </p>
+        <p class="story-sub">
+          The hummus is whipped fresh in the morning. The shawarma turns slow on the
+          vertical spit. The pita comes out of the oven all day. Come pick up dinner.
+        </p>
+        <a href="/about" class="story-link">More about the kitchen →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <div class="gallery-strip">
+      <figure>
+        <Image src={gallery1} alt="Mediterranean spread with grilled vegetables, feta, and olives" widths={[300, 500, 700]} sizes="(min-width: 900px) 25vw, 50vw" loading="lazy" />
+      </figure>
+      <figure>
+        <Image src={gallery4} alt="Chicken kabobs over flatbread with cucumber, tomato, and dill yogurt" widths={[300, 500, 700]} sizes="(min-width: 900px) 25vw, 50vw" loading="lazy" />
+      </figure>
+      <figure>
+        <Image src={gallery2} alt="Tzatziki, hummus, and dips with pita on a stone counter" widths={[300, 500, 700]} sizes="(min-width: 900px) 25vw, 50vw" loading="lazy" />
+      </figure>
+      <figure>
+        <Image src={gallery3} alt="Greek salad with feta shared at a stone table by the sea" widths={[300, 500, 700]} sizes="(min-width: 900px) 25vw, 50vw" loading="lazy" />
+      </figure>
     </div>
   </section>
 
   <section class="reviews">
     <div class="container">
-      <p class="eyebrow section-eyebrow">What people say</p>
+      <header class="section-header">
+        <p class="eyebrow">What people say</p>
+      </header>
       <div class="review-grid">
         {reviews.map(r => (
           <blockquote class="review">
@@ -99,21 +187,47 @@ const reviews = [
   </section>
 
   <section class="final-cta">
+    <Image
+      src={finalBg}
+      alt=""
+      widths={[600, 1000, 1600]}
+      sizes="100vw"
+      loading="lazy"
+      class="final-bg"
+    />
+    <div class="final-overlay"></div>
     <div class="container final-cta-inner">
-      <h2>Hungry?</h2>
-      <p>Order online for pickup. Ready in about {site.orderUrl ? '20' : '15–25'} minutes.</p>
+      <p class="eyebrow">Hungry?</p>
+      <h2><em>Pick up dinner.</em></h2>
+      <p class="final-sub">
+        Order online for pickup. Ready in about {site.orderUrl ? '20' : '15–25'} minutes.
+      </p>
       <a href={orderHref} class="btn btn-primary btn-large" target={orderTarget} rel="noopener">Order Online</a>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  /* HERO */
+  /* HERO — editorial split layout */
   .hero {
-    padding: var(--space-7) 0 var(--space-7);
+    padding: var(--space-6) 0 var(--space-7);
     position: relative;
   }
-  .hero-inner { max-width: 900px; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .hero {
+      padding: var(--space-7) 0 var(--space-8);
+    }
+    .hero-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-7);
+    }
+  }
   .hero-title {
     margin: var(--space-3) 0 var(--space-4);
     line-height: 0.95;
@@ -126,61 +240,199 @@ const reviews = [
   .hero-lede {
     font-size: clamp(1.15rem, 2vw, 1.4rem);
     color: var(--ink-soft);
-    max-width: 36ch;
+    max-width: 38ch;
     margin-bottom: var(--space-4);
     line-height: 1.5;
   }
   .hero-ctas { display: flex; gap: var(--space-2); flex-wrap: wrap; }
 
+  .hero-figure {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 30px 60px -30px rgba(42, 38, 32, 0.4);
+    aspect-ratio: 4 / 5;
+    position: relative;
+  }
+  @media (min-width: 900px) {
+    .hero-figure {
+      aspect-ratio: 3 / 4;
+      transform: translateY(-1rem);
+    }
+  }
+  .hero-figure :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* MARQUEE band */
+  .marquee {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 0.85rem 0;
+    overflow: hidden;
+  }
+  .marquee-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    font-size: 0.875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .marquee em { color: var(--cream-warm); font-style: italic; text-transform: none; letter-spacing: 0; font-size: 1rem; }
+  .marquee .dot { color: var(--olive); opacity: 0.6; }
+  .marquee a { color: var(--cream); text-decoration: none; }
+  .marquee a:hover { color: var(--terracotta); }
+
   /* SECTION HELPERS */
-  .section-eyebrow { margin-bottom: var(--space-4); }
+  .section-header {
+    margin-bottom: var(--space-5);
+    max-width: 720px;
+  }
+  .section-title {
+    font-style: italic;
+    margin-top: var(--space-2);
+    color: var(--ink);
+  }
 
   /* CATEGORIES */
   .categories {
-    padding: var(--space-6) 0;
+    padding: var(--space-7) 0;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
-    background: var(--cream-warm);
   }
   .cat-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--space-4);
+    gap: var(--space-5);
   }
   @media (min-width: 768px) {
-    .cat-grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+    .cat-grid { grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+  }
+  .cat-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .cat-image {
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: 3px;
+    margin-bottom: var(--space-3);
+    background: var(--cream-warm);
+  }
+  .cat-image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 700ms ease;
+  }
+  .cat-card:hover .cat-image :global(img) {
+    transform: scale(1.04);
   }
   .cat-card h3 {
     font-style: italic;
     color: var(--olive-deep);
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-1);
   }
   .cat-card p {
     color: var(--ink-soft);
     font-size: 1.05rem;
   }
 
-  /* STORY */
+  /* STORY — alternating two-column */
   .story { padding: var(--space-7) 0; }
-  .story-inner { max-width: 720px; }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .story-grid {
+      grid-template-columns: 1fr 1.1fr;
+      gap: var(--space-7);
+    }
+  }
+  .story-figure {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 4px;
+    aspect-ratio: 4 / 5;
+  }
+  .story-figure :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .story-copy { max-width: 520px; }
   .story-text {
     font-family: var(--font-display);
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
-    line-height: 1.3;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    line-height: 1.25;
     margin: var(--space-3) 0 var(--space-3);
     font-weight: 300;
+    color: var(--ink);
+  }
+  .story-text em {
+    font-style: italic;
+    color: var(--olive-deep);
+  }
+  .story-sub {
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    margin-bottom: var(--space-3);
+    line-height: 1.6;
   }
   .story-link {
     font-size: 0.95rem;
     text-decoration: none;
     color: var(--terracotta);
+    font-weight: 500;
   }
   .story-link:hover { color: var(--terracotta-deep); }
 
+  /* GALLERY strip — 4-up, edge to edge */
+  .gallery {
+    background: var(--cream-warm);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .gallery-strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+  @media (min-width: 768px) {
+    .gallery-strip { grid-template-columns: repeat(4, 1fr); }
+  }
+  .gallery-strip figure {
+    margin: 0;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .gallery-strip figure :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 800ms ease, filter 400ms ease;
+    filter: saturate(1.05);
+  }
+  .gallery-strip figure:hover :global(img) {
+    transform: scale(1.05);
+  }
+
   /* REVIEWS */
   .reviews {
-    padding: var(--space-6) 0;
-    border-top: 1px solid var(--line);
+    padding: var(--space-7) 0;
   }
   .review-grid {
     display: grid;
@@ -197,8 +449,8 @@ const reviews = [
   .review-quote {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 1.15rem;
-    line-height: 1.4;
+    font-size: 1.2rem;
+    line-height: 1.45;
     color: var(--ink);
     margin-bottom: var(--space-2);
   }
@@ -208,26 +460,61 @@ const reviews = [
   }
   .review-attr span { font-style: italic; }
 
-  /* FINAL CTA */
+  /* FINAL CTA — full-bleed photo */
   .final-cta {
-    background: var(--ink);
-    color: var(--cream);
-    padding: var(--space-7) 0;
+    position: relative;
+    padding: var(--space-8) 0;
     text-align: center;
+    overflow: hidden;
+    isolation: isolate;
   }
-  .final-cta-inner { max-width: 600px; margin: 0 auto; }
+  .final-cta :global(.final-bg) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+  .final-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(42, 38, 32, 0.55), rgba(42, 38, 32, 0.85));
+    z-index: -1;
+  }
+  .final-cta-inner {
+    max-width: 640px;
+    color: var(--cream);
+  }
+  .final-cta .eyebrow { color: var(--cream-warm); opacity: 0.85; }
   .final-cta h2 {
     color: var(--cream);
     font-style: italic;
-    margin-bottom: var(--space-2);
+    margin: var(--space-2) 0 var(--space-3);
   }
-  .final-cta p {
+  .final-cta h2 em {
+    font-style: italic;
+    color: var(--cream);
+  }
+  .final-sub {
     color: var(--cream-warm);
     margin: 0 auto var(--space-4);
     font-size: 1.15rem;
+    max-width: 38ch;
   }
   .btn-large {
     padding: 1.1rem 2.5rem;
     font-size: 1.05rem;
+  }
+  /* Light up CTA on dark final section */
+  .final-cta .btn-primary {
+    background: var(--cream);
+    color: var(--ink);
+    border-color: var(--cream);
+  }
+  .final-cta .btn-primary:hover {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+    color: var(--cream);
   }
 </style>
