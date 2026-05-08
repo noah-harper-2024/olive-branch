@@ -1,65 +1,86 @@
 {
   "sections": [
     {
-      "name": "Salads & Soup",
+      "name": "Party Wings",
+      "note": "Breaded or naked. Buffalo, house sauce, lemon pepper, or BBQ.",
       "items": [
-        { "name": "Caesar Salad", "price": 0, "description": "" },
-        { "name": "Greek Salad", "price": 0, "description": "" },
-        { "name": "Soup of the Day", "price": 0, "description": "Cup or bowl" }
+        { "name": "6 PC", "price": 11, "description": "" },
+        { "name": "10 PC", "price": 14, "description": "" },
+        { "name": "15 PC", "price": 18, "description": "" },
+        { "name": "20 PC", "price": 23, "description": "" },
+        { "name": "25 PC", "price": 30, "description": "" },
+        { "name": "50 PC", "price": 60, "description": "" },
+        { "name": "100 PC", "price": 100, "description": "" }
       ]
     },
     {
-      "name": "Sandwiches & Wraps",
+      "name": "Appetizers",
       "items": [
-        { "name": "Crispy Chicken Sandwich", "price": 0, "description": "" },
-        { "name": "Spicy Chicken Sandwich", "price": 0, "description": "" },
-        { "name": "Single Cheeseburger", "price": 0, "description": "" },
-        { "name": "Beef Cheeseburger", "price": 0, "description": "" },
-        { "name": "Beef Shawarma Sandwich", "price": 0, "description": "" },
-        { "name": "Chicken Shawarma Sandwich", "price": 0, "description": "" },
-        { "name": "Falafel Sandwich", "price": 0, "description": "" },
-        { "name": "Rotisserie Wrap", "price": 0, "description": "" }
+        { "name": "Kibbeh (3 PC)", "price": 7, "description": "" },
+        { "name": "Kibbeh (6 PC)", "price": 10, "description": "" },
+        { "name": "Hummus", "price": 7, "description": "" },
+        { "name": "Hummus with Beef or Chicken", "price": 11, "description": "" },
+        { "name": "Babaganoush", "price": 7, "description": "" },
+        { "name": "Shrimp Basket (5 PC)", "price": 9, "description": "" },
+        { "name": "Falafel (5 PC)", "price": 7, "description": "" },
+        { "name": "Falafel (10 PC)", "price": 12, "description": "" }
       ]
     },
     {
-      "name": "Off the Grill",
+      "name": "Rice Bowls",
+      "note": "$14 each. All rice and meat topped with house sauce. Add grilled veggies +$3.",
       "items": [
-        { "name": "Steak Kabob", "price": 0, "description": "Served with rice and salad" },
-        { "name": "Beef Kabob", "price": 0, "description": "Served with rice and salad" },
-        { "name": "Chicken Kabob", "price": 0, "description": "Served with rice and salad" },
-        { "name": "Lamb Chop Plate", "price": 0, "description": "Served with rice and salad" },
-        { "name": "Beef Shawarma Plate", "price": 0, "description": "Served with rice and salad" },
-        { "name": "Chicken Shawarma Plate", "price": 0, "description": "Served with rice and salad" }
+        { "name": "Chicken Shawarma", "price": 0, "description": "" },
+        { "name": "Beef Shawarma", "price": 0, "description": "" },
+        { "name": "Gyro", "price": 0, "description": "" },
+        { "name": "Shrimp", "price": 0, "description": "" },
+        { "name": "Chicken Kabob", "price": 0, "description": "" },
+        { "name": "Steak Kabob", "price": 0, "description": "" }
       ]
     },
     {
-      "name": "Rotisserie Chicken",
+      "name": "Homestyle Tenders",
+      "note": "Served with one side and our signature sauce.",
       "items": [
-        { "name": "Whole Chicken", "price": 0, "description": "" },
-        { "name": "Half Chicken", "price": 0, "description": "" }
+        { "name": "3 PC", "price": 9, "description": "" },
+        { "name": "6 PC", "price": 13, "description": "" }
       ]
     },
     {
       "name": "Sides",
+      "note": "Small $5 / Large $8.",
       "items": [
-        { "name": "Hummus", "price": 0, "description": "" },
         { "name": "Okra", "price": 0, "description": "" },
+        { "name": "Onion Rings", "price": 0, "description": "" },
         { "name": "Pinto Beans", "price": 0, "description": "" },
+        { "name": "Fries", "price": 0, "description": "" },
+        { "name": "Cheese Fries", "price": 0, "description": "" },
+        { "name": "Corn", "price": 0, "description": "" },
+        { "name": "Fried Pita", "price": 0, "description": "" },
+        { "name": "Hummus", "price": 0, "description": "" },
+        { "name": "Hush Puppies", "price": 0, "description": "" },
         { "name": "Coleslaw", "price": 0, "description": "" },
         { "name": "Cucumber Salad", "price": 0, "description": "" },
-        { "name": "French Fries", "price": 0, "description": "" },
-        { "name": "Fried Pita", "price": 0, "description": "" },
-        { "name": "Tahini Sauce", "price": 0, "description": "" },
-        { "name": "Spicy Sauce", "price": 0, "description": "" },
-        { "name": "Turkish Sauce", "price": 0, "description": "" }
+        { "name": "Taboula", "price": 0, "description": "" },
+        { "name": "Sauces", "price": 0, "description": "Tahini · Spicy · Turkish" }
       ]
     },
     {
-      "name": "Extras",
+      "name": "Jumbo Shrimp",
       "items": [
-        { "name": "Extra Beef Kabob", "price": 0, "description": "" },
-        { "name": "Extra Chicken Kabob", "price": 0, "description": "" },
-        { "name": "Extra Lamb Chop", "price": 0, "description": "" }
+        { "name": "5 PC", "price": 7, "description": "" },
+        { "name": "10 PC", "price": 14, "description": "" },
+        { "name": "15 PC", "price": 18, "description": "" }
+      ]
+    },
+    {
+      "name": "Family Dinner",
+      "note": "Served on a bed of rice with two large sides.",
+      "items": [
+        { "name": "Lamb Chop (6 PC)", "price": 59, "description": "" },
+        { "name": "Shish Kabob (6 PC)", "price": 30, "description": "" },
+        { "name": "Steak Kabob (6 PC)", "price": 35, "description": "" },
+        { "name": "Grilled Chicken Kabob (6 PC)", "price": 30, "description": "" }
       ]
     }
   ]

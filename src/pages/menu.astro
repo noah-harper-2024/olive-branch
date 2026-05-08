@@ -9,8 +9,14 @@ import menuHero from '../assets/photos/IMG_0171.jpg';
 const orderHref = site.orderUrl || '/order';
 const orderTarget = site.orderUrl ? '_blank' : '_self';
 
+function hasPrice(price) {
+  if (price === null || price === undefined) return false;
+  if (typeof price === 'string') return price.trim().length > 0;
+  return price > 0;
+}
 function formatPrice(price) {
-  if (!price || price === 0) return 'Ask';
+  if (typeof price === 'string') return price;
+  if (Number.isInteger(price)) return `$${price}`;
   return `$${price.toFixed(2)}`;
 }
 ---
@@ -44,13 +50,18 @@ function formatPrice(price) {
       {menu.sections.map(section => (
         <div class="menu-section">
           <h2 class="section-title">{section.name}</h2>
+          {section.note && <p class="section-note">{section.note}</p>}
           <ul class="items">
             {section.items.map(item => (
               <li class="item">
                 <div class="item-head">
                   <span class="item-name">{item.name}</span>
-                  <span class="item-dots"></span>
-                  <span class="item-price">{formatPrice(item.price)}</span>
+                  {hasPrice(item.price) && (
+                    <>
+                      <span class="item-dots"></span>
+                      <span class="item-price">{formatPrice(item.price)}</span>
+                    </>
+                  )}
                 </div>
                 {item.description && <p class="item-desc">{item.description}</p>}
               </li>
@@ -148,6 +159,12 @@ function formatPrice(price) {
     color: var(--olive-deep);
     border-bottom: 1px solid var(--line);
     padding-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+  .section-note {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
     margin-bottom: var(--space-4);
   }
 

@@ -4,14 +4,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import site from '../data/site.json';
 
 import hero from '../assets/photos/hero.jpg';
-import grill from '../assets/photos/IMG_0172.jpg';
-import rotisserie from '../assets/photos/IMG_0176.jpg';
-import wraps from '../assets/photos/IMG_0174.jpg';
+import bowls from '../assets/photos/IMG_0172.jpg';
+import family from '../assets/photos/IMG_0173.jpg';
+import mezze from '../assets/photos/IMG_0171.jpg';
 import storyTable from '../assets/photos/IMG_0169.jpg';
 import gallery1 from '../assets/photos/IMG_0168.jpg';
-import gallery2 from '../assets/photos/IMG_0171.jpg';
+import gallery2 from '../assets/photos/IMG_0174.jpg';
 import gallery3 from '../assets/photos/IMG_0170.jpg';
-import gallery4 from '../assets/photos/IMG_0173.jpg';
+import gallery4 from '../assets/photos/IMG_0176.jpg';
 import finalBg from '../assets/photos/IMG_0175.jpg';
 
 const orderHref = site.orderUrl || '/order';
@@ -19,22 +19,22 @@ const orderTarget = site.orderUrl ? '_blank' : '_self';
 
 const categories = [
   {
-    title: "Off the Grill",
-    description: "Kabobs and lamb chops. Marinated overnight, charred over open flame, served over rice.",
-    image: grill,
+    title: "Rice Bowls",
+    description: "Chicken or beef shawarma, gyro, shrimp, or kabob — over rice with our house sauce. $14.",
+    image: bowls,
     alt: "Char-grilled chicken kabobs with vegetables and a side of tzatziki"
   },
   {
-    title: "The Rotisserie",
-    description: "Whole or half chickens, seasoned the night before, slow-roasted on the spit until the skin shatters.",
-    image: rotisserie,
-    alt: "Whole rotisserie chicken with herbs and roasted potatoes in a cast iron pan"
+    title: "Family Dinner",
+    description: "Lamb chop, shish kabob, steak kabob, or grilled chicken — six pieces, served with two large sides.",
+    image: family,
+    alt: "Chicken kabobs served over flatbread with cucumber, tomato, and dill yogurt"
   },
   {
-    title: "Sandwiches & Wraps",
-    description: "Shawarma carved off the vertical spit. Falafel fried to order. Fresh pita, every morning.",
-    image: wraps,
-    alt: "Mediterranean wrap with shawarma, pickled onions, herbs, and fries"
+    title: "Mezze",
+    description: "Hummus, babaganoush, kibbeh, falafel — made by hand every morning, eaten with fresh pita.",
+    image: mezze,
+    alt: "Tzatziki, hummus, and dips with pita and warm spices on a stone counter"
   }
 ];
 
@@ -151,13 +151,13 @@ const reviews = [
         <Image src={gallery1} alt="Mediterranean spread with grilled vegetables, feta, and olives" widths={[300, 500, 700]} sizes="(min-width: 900px) 25vw, 50vw" loading="lazy" />
       </figure>
       <figure>
-        <Image src={gallery4} alt="Chicken kabobs over flatbread with cucumber, tomato, and dill yogurt" widths={[300, 500, 700]} sizes="(min-width: 900px) 25vw, 50vw" loading="lazy" />
-      </figure>
-      <figure>
-        <Image src={gallery2} alt="Tzatziki, hummus, and dips with pita on a stone counter" widths={[300, 500, 700]} sizes="(min-width: 900px) 25vw, 50vw" loading="lazy" />
+        <Image src={gallery2} alt="Mediterranean wrap with shawarma, pickled onions, herbs, and fries" widths={[300, 500, 700]} sizes="(min-width: 900px) 25vw, 50vw" loading="lazy" />
       </figure>
       <figure>
         <Image src={gallery3} alt="Greek salad with feta shared at a stone table by the sea" widths={[300, 500, 700]} sizes="(min-width: 900px) 25vw, 50vw" loading="lazy" />
+      </figure>
+      <figure>
+        <Image src={gallery4} alt="Roast chicken with herbs and potatoes in a cast iron pan" widths={[300, 500, 700]} sizes="(min-width: 900px) 25vw, 50vw" loading="lazy" />
       </figure>
     </div>
   </section>
