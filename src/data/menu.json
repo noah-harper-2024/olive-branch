@@ -28,7 +28,7 @@
     },
     {
       "name": "Rice Bowls",
-      "note": "$14 each. All rice and meat topped with house sauce. Add grilled veggies +$3.",
+      "note": "$14 each. Rice and meat topped with house sauce. Add grilled veggies +$3.",
       "items": [
         { "name": "Chicken Shawarma", "price": 0, "description": "" },
         { "name": "Beef Shawarma", "price": 0, "description": "" },
@@ -39,7 +39,7 @@
       ]
     },
     {
-      "name": "Homestyle Tenders",
+      "name": "Homestyle Hand-Breaded Fresh Tenders",
       "note": "Served with one side and our signature sauce.",
       "items": [
         { "name": "3 PC", "price": 9, "description": "" },
@@ -62,7 +62,9 @@
         { "name": "Coleslaw", "price": 0, "description": "" },
         { "name": "Cucumber Salad", "price": 0, "description": "" },
         { "name": "Taboula", "price": 0, "description": "" },
-        { "name": "Sauces", "price": 0, "description": "Tahini · Spicy · Turkish" }
+        { "name": "Tahini Sauce", "price": 0, "description": "" },
+        { "name": "Spicy Sauce", "price": 0, "description": "" },
+        { "name": "Turkish Sauce", "price": 0, "description": "" }
       ]
     },
     {
@@ -78,8 +80,8 @@
       "note": "Served on a bed of rice with two large sides.",
       "items": [
         { "name": "Lamb Chop (6 PC)", "price": 59, "description": "" },
-        { "name": "Shish Kabob (6 PC)", "price": 30, "description": "" },
-        { "name": "Steak Kabob (6 PC)", "price": 35, "description": "" },
+        { "name": "Shish Kabob Skewers (6 PC)", "price": 30, "description": "" },
+        { "name": "Steak Kabob Skewers (6 PC)", "price": 35, "description": "" },
         { "name": "Grilled Chicken Kabob (6 PC)", "price": 30, "description": "" }
       ]
     }
