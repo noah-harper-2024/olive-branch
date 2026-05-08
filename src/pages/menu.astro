@@ -16,29 +16,27 @@ function formatPrice(price) {
 ---
 
 <BaseLayout title="Menu">
-  <section class="menu-hero">
-    <div class="container menu-hero-grid">
-      <div class="menu-hero-copy">
-        <p class="eyebrow">The kitchen</p>
-        <h1><em>Menu.</em></h1>
-        <p class="lede">
-          Carry-out only. Phone orders welcome.
-          Online ordering {site.orderUrl ? 'is live' : 'launching soon'}.
-        </p>
-        <div class="hero-ctas">
-          <a href={orderHref} class="btn btn-primary" target={orderTarget} rel="noopener">Order Online</a>
-          <a href={`tel:${site.phone.tel}`} class="btn btn-secondary">Call {site.phone.display}</a>
-        </div>
+  <section class="hero hero-interior">
+    <Image
+      src={menuHero}
+      alt="Tzatziki, hummus, and dips with pita and warm spices on a stone counter"
+      widths={[720, 1200, 1600, 2000]}
+      sizes="100vw"
+      loading="eager"
+      class="hero-bg"
+    />
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <p class="eyebrow hero-eyebrow">The kitchen</p>
+      <h1 class="hero-title">Menu</h1>
+      <p class="hero-sub">
+        Carry-out only. Phone orders welcome.
+        Online ordering {site.orderUrl ? 'is live' : 'launching soon'}.
+      </p>
+      <div class="hero-ctas">
+        <a href={orderHref} class="btn btn-primary" target={orderTarget} rel="noopener">Order Online</a>
+        <a href={`tel:${site.phone.tel}`} class="btn btn-secondary btn-on-dark">Call {site.phone.display}</a>
       </div>
-      <figure class="menu-hero-figure">
-        <Image
-          src={menuHero}
-          alt="Tzatziki, hummus, and dips with pita and warm spices on a stone counter"
-          widths={[400, 600, 800]}
-          sizes="(min-width: 900px) 40vw, 100vw"
-          loading="eager"
-        />
-      </figure>
     </div>
   </section>
 
@@ -73,50 +71,72 @@ function formatPrice(price) {
 </BaseLayout>
 
 <style>
-  .menu-hero {
-    padding: var(--space-6) 0 var(--space-6);
-    border-bottom: 1px solid var(--line);
-  }
-  .menu-hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-5);
+  /* Shared full-bleed hero — interior pages (shorter than home) */
+  .hero-interior {
+    position: relative;
+    min-height: min(60vh, 560px);
+    display: flex;
     align-items: center;
-  }
-  @media (min-width: 900px) {
-    .menu-hero-grid {
-      grid-template-columns: 1.1fr 1fr;
-      gap: var(--space-6);
-    }
-  }
-  .menu-hero h1 {
-    margin: var(--space-2) 0 var(--space-3);
-    font-style: italic;
-  }
-  .menu-hero h1 em { font-style: italic; color: var(--olive-deep); font-weight: 300; }
-  .lede {
-    font-size: 1.15rem;
-    color: var(--ink-soft);
-    margin-bottom: var(--space-3);
-    line-height: 1.5;
-    max-width: 38ch;
-  }
-  .hero-ctas { display: flex; gap: var(--space-2); flex-wrap: wrap; }
-
-  .menu-hero-figure {
-    margin: 0;
+    justify-content: center;
     overflow: hidden;
-    border-radius: 4px;
-    aspect-ratio: 4 / 5;
+    isolation: isolate;
+    text-align: center;
   }
-  .menu-hero-figure :global(img) {
+  .hero-interior :global(.hero-bg) {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
+    z-index: -2;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(20, 17, 13, 0.4) 0%, rgba(20, 17, 13, 0.65) 100%);
+    z-index: -1;
+  }
+  .hero-content {
+    color: var(--cream);
+    padding: var(--space-6) var(--space-3);
+    max-width: 900px;
+  }
+  .hero-eyebrow {
+    color: var(--cream-warm);
+    margin-bottom: var(--space-3);
+    opacity: 0.9;
+  }
+  .hero-title {
+    color: var(--cream);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+  }
+  .hero-sub {
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    color: var(--cream-warm);
+    max-width: 38ch;
+    margin: 0 auto var(--space-4);
+    line-height: 1.5;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn-on-dark {
+    color: var(--cream);
+    border-color: var(--cream);
+  }
+  .btn-on-dark:hover {
+    background: var(--cream);
+    color: var(--ink);
   }
 
-  .menu-body { padding: var(--space-6) 0; }
+  .menu-body { padding: var(--space-7) 0; }
   .menu-container { max-width: 760px; }
 
   .menu-section {

@@ -59,32 +59,24 @@ const reviews = [
 ---
 
 <BaseLayout>
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow">{site.city} · Carry-out kitchen</p>
-        <h1 class="hero-title">
-          Authentic<br />
-          <em>Mediterranean.</em>
-        </h1>
-        <p class="hero-lede">
-          Off the grill. Rotisserie chicken on the spit. Hummus and pita made fresh.
-          Family recipes, served quick, in a quiet corner of {site.city}.
-        </p>
-        <div class="hero-ctas">
-          <a href={orderHref} class="btn btn-primary" target={orderTarget} rel="noopener">Order Online</a>
-          <a href="/menu" class="btn btn-secondary">See the Menu</a>
-        </div>
+  <section class="hero hero-full">
+    <Image
+      src={hero}
+      alt="Hummus, muhammara, and dips with olives on a green tiled table"
+      widths={[720, 1200, 1600, 2000]}
+      sizes="100vw"
+      loading="eager"
+      class="hero-bg"
+    />
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <p class="eyebrow hero-eyebrow">{site.city} · Carry-out kitchen</p>
+      <h1 class="hero-title">Olive Branch</h1>
+      <p class="hero-sub">Authentic Mediterranean</p>
+      <div class="hero-ctas">
+        <a href={orderHref} class="btn btn-primary" target={orderTarget} rel="noopener">Order Online</a>
+        <a href="/menu" class="btn btn-secondary btn-on-dark">See the Menu</a>
       </div>
-      <figure class="hero-figure">
-        <Image
-          src={hero}
-          alt="Hummus, muhammara, and dips with olives on a green tiled table"
-          widths={[480, 720, 960, 1200]}
-          sizes="(min-width: 900px) 45vw, 100vw"
-          loading="eager"
-        />
-      </figure>
     </div>
   </section>
 
@@ -208,63 +200,71 @@ const reviews = [
 </BaseLayout>
 
 <style>
-  /* HERO — editorial split layout */
-  .hero {
-    padding: var(--space-6) 0 var(--space-7);
+  /* HERO — full-bleed, edge to edge */
+  .hero-full {
     position: relative;
-  }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-5);
+    min-height: min(85vh, 820px);
+    display: flex;
     align-items: center;
-  }
-  @media (min-width: 900px) {
-    .hero {
-      padding: var(--space-7) 0 var(--space-8);
-    }
-    .hero-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-7);
-    }
-  }
-  .hero-title {
-    margin: var(--space-3) 0 var(--space-4);
-    line-height: 0.95;
-  }
-  .hero-title em {
-    font-style: italic;
-    color: var(--olive-deep);
-    font-weight: 300;
-  }
-  .hero-lede {
-    font-size: clamp(1.15rem, 2vw, 1.4rem);
-    color: var(--ink-soft);
-    max-width: 38ch;
-    margin-bottom: var(--space-4);
-    line-height: 1.5;
-  }
-  .hero-ctas { display: flex; gap: var(--space-2); flex-wrap: wrap; }
-
-  .hero-figure {
-    margin: 0;
+    justify-content: center;
     overflow: hidden;
-    border-radius: 4px;
-    box-shadow: 0 30px 60px -30px rgba(42, 38, 32, 0.4);
-    aspect-ratio: 4 / 5;
-    position: relative;
+    isolation: isolate;
+    text-align: center;
   }
-  @media (min-width: 900px) {
-    .hero-figure {
-      aspect-ratio: 3 / 4;
-      transform: translateY(-1rem);
-    }
-  }
-  .hero-figure :global(img) {
+  .hero-full :global(.hero-bg) {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
+    z-index: -2;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(20, 17, 13, 0.35) 0%, rgba(20, 17, 13, 0.6) 100%);
+    z-index: -1;
+  }
+  .hero-content {
+    color: var(--cream);
+    padding: var(--space-6) var(--space-3);
+    max-width: 900px;
+  }
+  .hero-eyebrow {
+    color: var(--cream-warm);
+    margin-bottom: var(--space-3);
+    opacity: 0.9;
+  }
+  .hero-title {
+    color: var(--cream);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+  }
+  .hero-sub {
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    color: var(--cream-warm);
+    max-width: 38ch;
+    margin: 0 auto var(--space-4);
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  /* Light variant of secondary button on dark hero */
+  .btn-on-dark {
+    color: var(--cream);
+    border-color: var(--cream);
+  }
+  .btn-on-dark:hover {
+    background: var(--cream);
+    color: var(--ink);
   }
 
   /* MARQUEE band */
@@ -398,7 +398,7 @@ const reviews = [
   }
   .story-link:hover { color: var(--terracotta-deep); }
 
-  /* GALLERY strip — 4-up, edge to edge */
+  /* GALLERY strip */
   .gallery {
     background: var(--cream-warm);
     border-top: 1px solid var(--line);
@@ -423,7 +423,7 @@ const reviews = [
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 800ms ease, filter 400ms ease;
+    transition: transform 800ms ease;
     filter: saturate(1.05);
   }
   .gallery-strip figure:hover :global(img) {
@@ -506,7 +506,6 @@ const reviews = [
     padding: 1.1rem 2.5rem;
     font-size: 1.05rem;
   }
-  /* Light up CTA on dark final section */
   .final-cta .btn-primary {
     background: var(--cream);
     color: var(--ink);

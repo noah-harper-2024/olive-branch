@@ -4,29 +4,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import site from '../data/site.json';
 
 import aboutHero from '../assets/photos/IMG_0168.jpg';
-import aboutMid from '../assets/photos/IMG_0170.jpg';
 ---
 
 <BaseLayout title="About">
-  <section class="about-hero">
-    <div class="container about-hero-grid">
-      <div class="about-hero-copy">
-        <p class="eyebrow">About</p>
-        <h1>The <em>Kitchen.</em></h1>
-        <p class="lead">
-          Olive Branch is a small, family-run Mediterranean kitchen in {site.city}.
-          We're new to town. The recipes are not.
-        </p>
-      </div>
-      <figure class="about-hero-figure">
-        <Image
-          src={aboutHero}
-          alt="A rustic Mediterranean spread of grilled vegetables, feta, olives, hummus, and warm pita on a wood table"
-          widths={[400, 600, 800]}
-          sizes="(min-width: 900px) 45vw, 100vw"
-          loading="eager"
-        />
-      </figure>
+  <section class="hero hero-interior">
+    <Image
+      src={aboutHero}
+      alt="A rustic Mediterranean spread of grilled vegetables, feta, olives, hummus, and warm pita on a wood table"
+      widths={[720, 1200, 1600, 2000]}
+      sizes="100vw"
+      loading="eager"
+      class="hero-bg"
+    />
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <p class="eyebrow hero-eyebrow">About</p>
+      <h1 class="hero-title">The Kitchen</h1>
+      <p class="hero-sub">
+        A small, family-run Mediterranean kitchen in {site.city}.
+        We're new to town. The recipes are not.
+      </p>
     </div>
   </section>
 
@@ -62,17 +59,6 @@ import aboutMid from '../assets/photos/IMG_0170.jpg';
     </div>
   </section>
 
-  <section class="about-banner">
-    <Image
-      src={aboutMid}
-      alt="Hands sharing a Greek salad with feta at a stone table overlooking the sea"
-      widths={[600, 1000, 1600]}
-      sizes="100vw"
-      loading="lazy"
-      class="banner-img"
-    />
-  </section>
-
   <section class="about-cta">
     <div class="container">
       <p class="eyebrow">Visit</p>
@@ -83,53 +69,59 @@ import aboutMid from '../assets/photos/IMG_0170.jpg';
 </BaseLayout>
 
 <style>
-  .about-hero {
-    padding: var(--space-6) 0 var(--space-7);
-  }
-  .about-hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-5);
+  /* Shared full-bleed hero — interior pages */
+  .hero-interior {
+    position: relative;
+    min-height: min(60vh, 560px);
+    display: flex;
     align-items: center;
-  }
-  @media (min-width: 900px) {
-    .about-hero-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-7);
-    }
-  }
-  .about-hero h1 {
-    margin: var(--space-2) 0 var(--space-4);
-  }
-  .about-hero h1 em {
-    font-style: italic;
-    color: var(--olive-deep);
-    font-weight: 300;
-  }
-  .lead {
-    font-family: var(--font-display);
-    font-size: clamp(1.4rem, 2.5vw, 1.85rem);
-    line-height: 1.35;
-    color: var(--ink);
-    font-weight: 300;
-    max-width: 30ch;
-  }
-  .about-hero-figure {
-    margin: 0;
+    justify-content: center;
     overflow: hidden;
-    border-radius: 4px;
-    aspect-ratio: 4 / 5;
+    isolation: isolate;
+    text-align: center;
   }
-  .about-hero-figure :global(img) {
+  .hero-interior :global(.hero-bg) {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
+    z-index: -2;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(20, 17, 13, 0.4) 0%, rgba(20, 17, 13, 0.65) 100%);
+    z-index: -1;
+  }
+  .hero-content {
+    color: var(--cream);
+    padding: var(--space-6) var(--space-3);
+    max-width: 900px;
+  }
+  .hero-eyebrow {
+    color: var(--cream-warm);
+    margin-bottom: var(--space-3);
+    opacity: 0.9;
+  }
+  .hero-title {
+    color: var(--cream);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+  }
+  .hero-sub {
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    color: var(--cream-warm);
+    max-width: 42ch;
+    margin: 0 auto var(--space-4);
+    line-height: 1.5;
   }
 
   .about-body {
-    padding: var(--space-6) 0 var(--space-7);
-    border-top: 1px solid var(--line);
+    padding: var(--space-7) 0;
   }
   .about-body-inner { max-width: 720px; }
 
@@ -159,22 +151,6 @@ import aboutMid from '../assets/photos/IMG_0170.jpg';
   .value p {
     font-size: 0.95rem;
     color: var(--ink-soft);
-  }
-
-  .about-banner {
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: 21 / 9;
-    background: var(--ink);
-  }
-  @media (max-width: 768px) {
-    .about-banner { aspect-ratio: 4 / 3; }
-  }
-  .about-banner :global(.banner-img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
   }
 
   .about-cta {

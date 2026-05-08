@@ -1,48 +1,99 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import site from '../data/site.json';
+
+import orderHero from '../assets/photos/IMG_0169.jpg';
 ---
 
 <BaseLayout title="Order Online">
-  <section class="order-hero">
-    <div class="container order-container">
-      <p class="eyebrow">Online Ordering</p>
-      <h1><em>Almost ready.</em></h1>
-      <p class="lede">
+  <section class="hero hero-interior">
+    <Image
+      src={orderHero}
+      alt="Sunlit Mediterranean table with hummus, pita, olives, and an olive branch"
+      widths={[720, 1200, 1600, 2000]}
+      sizes="100vw"
+      loading="eager"
+      class="hero-bg"
+    />
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <p class="eyebrow hero-eyebrow">Online Ordering</p>
+      <h1 class="hero-title">Almost ready.</h1>
+      <p class="hero-sub">
         We're getting our online ordering set up this week. In the meantime,
         give us a call — we'll have it hot and ready when you arrive.
       </p>
-      <div class="ctas">
+      <div class="hero-ctas">
         <a href={`tel:${site.phone.tel}`} class="btn btn-primary">Call {site.phone.display}</a>
-        <a href="/menu" class="btn btn-secondary">See the Menu</a>
+        <a href="/menu" class="btn btn-secondary btn-on-dark">See the Menu</a>
       </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .order-hero {
-    padding: var(--space-7) 0 var(--space-8);
+  .hero-interior {
+    position: relative;
+    min-height: min(70vh, 700px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    isolation: isolate;
     text-align: center;
   }
-  .order-container { max-width: 640px; }
-  .order-hero h1 {
-    margin: var(--space-2) 0 var(--space-4);
+  .hero-interior :global(.hero-bg) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
   }
-  .order-hero h1 em {
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(20, 17, 13, 0.4) 0%, rgba(20, 17, 13, 0.65) 100%);
+    z-index: -1;
+  }
+  .hero-content {
+    color: var(--cream);
+    padding: var(--space-6) var(--space-3);
+    max-width: 720px;
+  }
+  .hero-eyebrow {
+    color: var(--cream-warm);
+    margin-bottom: var(--space-3);
+    opacity: 0.9;
+  }
+  .hero-title {
+    color: var(--cream);
     font-style: italic;
-    color: var(--olive-deep);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-3);
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
   }
-  .lede {
-    font-size: 1.2rem;
-    color: var(--ink-soft);
+  .hero-sub {
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    color: var(--cream-warm);
+    max-width: 42ch;
     margin: 0 auto var(--space-4);
     line-height: 1.5;
   }
-  .ctas {
+  .hero-ctas {
     display: flex;
     gap: var(--space-2);
-    justify-content: center;
     flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn-on-dark {
+    color: var(--cream);
+    border-color: var(--cream);
+  }
+  .btn-on-dark:hover {
+    background: var(--cream);
+    color: var(--ink);
   }
 </style>
